@@ -1,0 +1,33 @@
+package Exams.E07JavaOOPExam_15August2021.P01StructureAndBusinessLogic.restaurant;
+
+import restaurant.core.ControllerImpl;
+import restaurant.core.EngineImpl;
+import restaurant.core.interfaces.Controller;
+import restaurant.entities.drinks.interfaces.Beverages;
+import restaurant.entities.healthyFoods.interfaces.HealthyFood;
+import restaurant.entities.tables.interfaces.Table;
+
+import restaurant.io.ConsoleReader;
+import restaurant.io.ConsoleWriter;
+import Exams.E07JavaOOPExam_15August2021.P01StructureAndBusinessLogic.restaurant.repositories.BeverageRepositoryImpl;
+import Exams.E07JavaOOPExam_15August2021.P01StructureAndBusinessLogic.restaurant.repositories.HealthFoodRepositoryImpl;
+import Exams.E07JavaOOPExam_15August2021.P01StructureAndBusinessLogic.restaurant.repositories.TableRepositoryImpl;
+import restaurant.repositories.interfaces.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        HealthFoodRepository<HealthyFood> healthFoodRepository = new HealthFoodRepositoryImpl();
+        BeverageRepository<Beverages> beverageRepository = new BeverageRepositoryImpl();
+        TableRepository<Table> tableRepository = new TableRepositoryImpl();
+
+
+        Controller controller = new ControllerImpl(healthFoodRepository, beverageRepository, tableRepository);
+
+        ConsoleReader reader = new ConsoleReader();
+        ConsoleWriter writer = new ConsoleWriter();
+        EngineImpl engine = new EngineImpl(reader, writer, controller);
+        engine.run();
+
+    }
+}
